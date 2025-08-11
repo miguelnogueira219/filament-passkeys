@@ -4,7 +4,14 @@ declare(strict_types=1);
 
 namespace MarcelWeidum\Passkeys;
 
+use Filament\Auth\Pages\EditProfile;
+use Filament\Support\Assets\Asset;
+use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\View;
 use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -56,6 +63,23 @@ final class PasskeysServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        // Asset Registration
+        FilamentAsset::register(
+            $this->getAssets(),
+            $this->getAssetPackageName()
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
+            fn (): View => view('filament-passkeys::login'),
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::SIMPLE_PAGE_END,
+            fn (): View => view('filament-passkeys::profile'),
+            scopes: EditProfile::class,
+        );
+
         // Handle Stubs
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
@@ -69,6 +93,16 @@ final class PasskeysServiceProvider extends PackageServiceProvider
     protected function getAssetPackageName(): string
     {
         return 'marcelweidum/filament-passkeys';
+    }
+
+    /**
+     * @return array<Asset>
+     */
+    protected function getAssets(): array
+    {
+        return [
+            Js::make('filament-passkeys-scripts', __DIR__.'/../resources/dist/filament-passkeys.js'),
+        ];
     }
 
     /**
@@ -86,7 +120,9 @@ final class PasskeysServiceProvider extends PackageServiceProvider
      */
     protected function getRoutes(): array
     {
-        return [];
+        return [
+            //
+        ];
     }
 
     /**
