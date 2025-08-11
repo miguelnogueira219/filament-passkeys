@@ -4,16 +4,8 @@ declare(strict_types=1);
 
 namespace MarcelWeidum\Passkeys;
 
-use Filament\Support\Assets\AlpineComponent;
-use Filament\Support\Assets\Asset;
-use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
-use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
-use Livewire\Features\SupportTesting\Testable;
 use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
-use MarcelWeidum\Passkeys\Testing\TestsPasskeys;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -64,20 +56,6 @@ final class PasskeysServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        // Asset Registration
-        FilamentAsset::register(
-            $this->getAssets(),
-            $this->getAssetPackageName()
-        );
-
-        FilamentAsset::registerScriptData(
-            $this->getScriptData(),
-            $this->getAssetPackageName()
-        );
-
-        // Icon Registration
-        FilamentIcon::register($this->getIcons());
-
         // Handle Stubs
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
@@ -86,26 +64,11 @@ final class PasskeysServiceProvider extends PackageServiceProvider
                 ], 'filament-passkeys-stubs');
             }
         }
-
-        // Testing
-        Testable::mixin(new TestsPasskeys());
     }
 
-    protected function getAssetPackageName(): ?string
+    protected function getAssetPackageName(): string
     {
         return 'marcelweidum/filament-passkeys';
-    }
-
-    /**
-     * @return array<Asset>
-     */
-    protected function getAssets(): array
-    {
-        return [
-            // AlpineComponent::make('filament-passkeys', __DIR__ . '/../resources/dist/components/filament-passkeys.js'),
-            Css::make('filament-passkeys-styles', __DIR__.'/../resources/dist/filament-passkeys.css'),
-            Js::make('filament-passkeys-scripts', __DIR__.'/../resources/dist/filament-passkeys.js'),
-        ];
     }
 
     /**
@@ -121,23 +84,7 @@ final class PasskeysServiceProvider extends PackageServiceProvider
     /**
      * @return array<string>
      */
-    protected function getIcons(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string>
-     */
     protected function getRoutes(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getScriptData(): array
     {
         return [];
     }
