@@ -88,7 +88,7 @@ final class PasskeysServiceProvider extends PackageServiceProvider
         }
 
         // Testing
-        Testable::mixin(new TestsPasskeys);
+        Testable::mixin(new TestsPasskeys());
     }
 
     protected function getAssetPackageName(): ?string
