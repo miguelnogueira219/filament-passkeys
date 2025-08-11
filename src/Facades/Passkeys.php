@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MarcelWeidum\Passkeys\Facades;
 
 use Illuminate\Support\Facades\Facade;
@@ -7,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \MarcelWeidum\Passkeys\Passkeys
  */
-class Passkeys extends Facade
+final class Passkeys extends Facade
 {
     protected static function getFacadeAccessor()
     {

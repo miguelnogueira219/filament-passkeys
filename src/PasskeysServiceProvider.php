@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MarcelWeidum\Passkeys;
 
 use Filament\Support\Assets\AlpineComponent;
@@ -10,13 +12,13 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
+use MarcelWeidum\Passkeys\Testing\TestsPasskeys;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
-use MarcelWeidum\Passkeys\Testing\TestsPasskeys;
 
-class PasskeysServiceProvider extends PackageServiceProvider
+final class PasskeysServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-passkeys';
 
@@ -29,7 +31,7 @@ class PasskeysServiceProvider extends PackageServiceProvider
          *
          * More info: https://github.com/spatie/laravel-package-tools
          */
-        $package->name(static::$name)
+        $package->name(self::$name)
             ->hasCommands($this->getCommands())
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
@@ -54,7 +56,7 @@ class PasskeysServiceProvider extends PackageServiceProvider
         }
 
         if (file_exists($package->basePath('/../resources/views'))) {
-            $package->hasViews(static::$viewNamespace);
+            $package->hasViews(self::$viewNamespace);
         }
     }
 
@@ -78,7 +80,7 @@ class PasskeysServiceProvider extends PackageServiceProvider
 
         // Handle Stubs
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
+            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
                 $this->publishes([
                     $file->getRealPath() => base_path("stubs/filament-passkeys/{$file->getFilename()}"),
                 ], 'filament-passkeys-stubs');
@@ -101,8 +103,8 @@ class PasskeysServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filament-passkeys', __DIR__ . '/../resources/dist/components/filament-passkeys.js'),
-            Css::make('filament-passkeys-styles', __DIR__ . '/../resources/dist/filament-passkeys.css'),
-            Js::make('filament-passkeys-scripts', __DIR__ . '/../resources/dist/filament-passkeys.js'),
+            Css::make('filament-passkeys-styles', __DIR__.'/../resources/dist/filament-passkeys.css'),
+            Js::make('filament-passkeys-scripts', __DIR__.'/../resources/dist/filament-passkeys.js'),
         ];
     }
 

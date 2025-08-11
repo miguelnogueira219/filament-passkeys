@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MarcelWeidum\Passkeys\Commands;
 
 use Illuminate\Console\Command;
 
-class PasskeysCommand extends Command
+final class PasskeysCommand extends Command
 {
     public $signature = 'filament-passkeys';
 
