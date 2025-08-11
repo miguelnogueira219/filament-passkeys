@@ -10,11 +10,11 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
+use MarcelWeidum\Passkeys\Testing\TestsPasskeys;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
-use MarcelWeidum\Passkeys\Testing\TestsPasskeys;
 
 class PasskeysServiceProvider extends PackageServiceProvider
 {
