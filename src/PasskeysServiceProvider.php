@@ -12,7 +12,9 @@ use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\View;
+use Livewire\Livewire;
 use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
+use MarcelWeidum\Passkeys\Livewire\Passkeys as LivewirePasskeys;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -79,6 +81,8 @@ final class PasskeysServiceProvider extends PackageServiceProvider
             fn (): View => view('filament-passkeys::profile'),
             scopes: EditProfile::class,
         );
+
+        Livewire::component('filament-passkeys', LivewirePasskeys::class);
 
         // Handle Stubs
         if (app()->runningInConsole()) {
