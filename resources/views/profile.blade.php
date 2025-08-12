@@ -3,5 +3,5 @@
         {{ __('Passkeys') }}
     </x-slot>
 
-    <livewire:filament-passkeys :isSimple="$this->isSimple()" />
+    <livewire:filament-passkeys />
 </x-filament::section>
