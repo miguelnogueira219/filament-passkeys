@@ -51,6 +51,9 @@ php artisan migrate
 Route::passkeys();
 ```
 
+## Common problems
+If you're having problems creating passkeys on your profile page, check if your `APP_URL` in the `.env` file is set to the correct url of the application.
+
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
