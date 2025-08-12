@@ -6,7 +6,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/marcelweidum/filament-passkeys/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/marcelweidum/filament-passkeys/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 
 Use passkeys in your filamentphp app.
-This package is using the [Passkeys package from spatie](https://spatie.be/docs/laravel-passkeys).
+This package is using the [passkeys package from spatie](https://spatie.be/docs/laravel-passkeys).
 
 ## Installation
 
