@@ -6,6 +6,7 @@ namespace MarcelWeidum\Passkeys;
 
 use Filament\Auth\Pages\EditProfile;
 use Filament\Support\Assets\Asset;
+use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentView;
@@ -111,6 +112,7 @@ final class PasskeysServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
+            Css::make('filament-passkeys-styles', __DIR__.'./../resources/dist/filament-passkeys.css'),
             Js::make('filament-passkeys-scripts', __DIR__.'/../resources/dist/filament-passkeys.js'),
         ];
     }
