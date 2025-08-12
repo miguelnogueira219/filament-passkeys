@@ -82,6 +82,12 @@ final class PasskeysServiceProvider extends PackageServiceProvider
             scopes: EditProfile::class,
         );
 
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::PAGE_END,
+            fn (): View => view('filament-passkeys::profile'),
+            scopes: EditProfile::class,
+        );
+
         Livewire::component('filament-passkeys', LivewirePasskeys::class);
 
         // Handle Stubs

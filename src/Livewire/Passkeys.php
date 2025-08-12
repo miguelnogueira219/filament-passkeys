@@ -9,6 +9,13 @@ use Spatie\LaravelPasskeys\Livewire\PasskeysComponent;
 
 final class Passkeys extends PasskeysComponent
 {
+    public $isSimple;
+
+    public function mount($isSimple): void
+    {
+        $this->isSimple = $isSimple;
+    }
+
     public function render(): View
     {
         return view('filament-passkeys::livewire.passkeys', data: [
