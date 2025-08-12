@@ -1,64 +1,50 @@
-# Use passkeys in your filamentphp app
+# Filament Passkeys
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/marcelweidum/filament-passkeys.svg?style=flat-square)](https://packagist.org/packages/marcelweidum/filament-passkeys)
+[![Total Downloads](https://img.shields.io/packagist/dt/marcelweidum/filament-passkeys.svg?style=flat-square)](https://packagist.org/packages/marcelweidum/filament-passkeys)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/marcelweidum/filament-passkeys/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/marcelweidum/filament-passkeys/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/marcelweidum/filament-passkeys/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/marcelweidum/filament-passkeys/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/marcelweidum/filament-passkeys.svg?style=flat-square)](https://packagist.org/packages/marcelweidum/filament-passkeys)
 
-
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Use passkeys in your filamentphp app.
 
 ## Installation
 
-You can install the package via composer:
+1. Install the package via composer:
 
 ```bash
 composer require marcelweidum/filament-passkeys
 ```
 
-You can publish and run the migrations with:
+2. Add the package's interface and trait to your user model
+
+```php
+namespace App\Models;
+
+use Spatie\LaravelPasskeys\Models\Concerns\HasPasskeys;
+use Spatie\LaravelPasskeys\Models\Concerns\InteractsWithPasskeys;
+// ...
+
+class User extends Authenticatable implements HasPasskeys
+{
+    use HasFactory, Notifiable, InteractsWithPasskeys;
+
+    // ... 
+}
+```
+
+3. Publish and run the migrations
 
 ```bash
-php artisan vendor:publish --tag="filament-passkeys-migrations"
+php artisan vendor:publish --tag="passkeys-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-passkeys-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-passkeys-views"
-```
-
-This is the contents of the published config file:
+4. Add the package provided routes
 
 ```php
-return [
-];
+// routes/web.php
+Route::passkeys();
 ```
-
-## Usage
-
-```php
-$passkeys = new MarcelWeidum\Passkeys();
-echo $passkeys->echoPhrase('Hello, MarcelWeidum!');
-```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
