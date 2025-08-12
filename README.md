@@ -2,8 +2,8 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/marcelweidum/filament-passkeys.svg?style=flat-square)](https://packagist.org/packages/marcelweidum/filament-passkeys)
 [![Total Downloads](https://img.shields.io/packagist/dt/marcelweidum/filament-passkeys.svg?style=flat-square)](https://packagist.org/packages/marcelweidum/filament-passkeys)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/marcelweidum/filament-passkeys/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/marcelweidum/filament-passkeys/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/marcelweidum/filament-passkeys/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/marcelweidum/filament-passkeys/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+![Filament 4.x](https://img.shields.io/badge/Filament-4.x-007ec6?style=flat-square)
 
 Use passkeys in your filamentphp app.
 This package is using the [passkeys package from spatie](https://spatie.be/docs/laravel-passkeys).
