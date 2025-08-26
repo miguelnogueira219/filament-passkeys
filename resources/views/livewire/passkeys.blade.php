@@ -21,7 +21,7 @@
         </form>
     </div>
 
-    @if($passkeys)
+    @if($passkeys->isNotEmpty())
         <div class="mt-6">
             <span class="font-bold text-sm">Passkeys</span>
             <ul class="space-y-4">
