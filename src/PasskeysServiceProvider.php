@@ -11,10 +11,8 @@ use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\View;
 use Livewire\Livewire;
-use MarcelWeidum\Passkeys\Commands\PasskeysCommand;
 use MarcelWeidum\Passkeys\Livewire\Passkeys as LivewirePasskeys;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -34,7 +32,6 @@ final class PasskeysServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package->name(self::$name)
-            ->hasCommands($this->getCommands())
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
@@ -47,10 +44,6 @@ final class PasskeysServiceProvider extends PackageServiceProvider
 
         if (file_exists($package->basePath("/../config/{$configFileName}.php"))) {
             $package->hasConfigFile();
-        }
-
-        if (file_exists($package->basePath('/../database/migrations'))) {
-            $package->hasMigrations($this->getMigrations());
         }
 
         if (file_exists($package->basePath('/../resources/lang'))) {
@@ -90,15 +83,6 @@ final class PasskeysServiceProvider extends PackageServiceProvider
         );
 
         Livewire::component('filament-passkeys', LivewirePasskeys::class);
-
-        // Handle Stubs
-        if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
-                $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filament-passkeys/{$file->getFilename()}"),
-                ], 'filament-passkeys-stubs');
-            }
-        }
     }
 
     protected function getAssetPackageName(): string
@@ -118,32 +102,12 @@ final class PasskeysServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * @return array<class-string>
-     */
-    protected function getCommands(): array
-    {
-        return [
-            PasskeysCommand::class,
-        ];
-    }
-
-    /**
      * @return array<string>
      */
     protected function getRoutes(): array
     {
         return [
             //
-        ];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getMigrations(): array
-    {
-        return [
-            'create_filament-passkeys_table',
         ];
     }
 }
