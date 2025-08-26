@@ -22,7 +22,7 @@
 
     @if($passkeys->isNotEmpty())
         <div class="mt-6">
-            <span class="font-bold text-sm">Passkeys</span>
+            <span class="font-bold text-sm">{{ __('filament-passkeys::passkeys.passkeys') }}</span>
             <ul class="space-y-4">
                 @foreach($passkeys as $passkey)
                     <x-filament::fieldset class="mt-2">

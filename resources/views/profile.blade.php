@@ -1,6 +1,6 @@
 <x-filament::section class="{{ $this->isSimple() ? 'mt-4' : 'mt-0 mb-4' }}">
     <x-slot name="heading">
-        {{ __('Passkeys') }}
+        {{ __('filament-passkeys::passkeys.passkeys') }}
     </x-slot>
 
     <x-slot name="description">
