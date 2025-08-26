@@ -53,7 +53,7 @@ Route::passkeys();
 (Optional) If you want to customize the translations, you can publish the translations by running:
 
 ```bash
-php artisan vendor:publish --tag="filament-passkeys"
+php artisan vendor:publish --tag="filament-passkeys-translations"
 ```
 
 ## Common problems
