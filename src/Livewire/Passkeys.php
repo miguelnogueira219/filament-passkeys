@@ -20,6 +20,7 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
     public function deleteAction(): Action
     {
         return Action::make('delete')
+            ->label(__('passkeys::passkeys.delete'))
             ->color('danger')
             ->requiresConfirmation()
             ->action(fn (array $arguments) => $this->deletePasskey($arguments['passkey']));
