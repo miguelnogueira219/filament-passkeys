@@ -42,7 +42,7 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
         parent::storePasskey($passkey);
 
         Notification::make()
-            ->title(__('filament-passkeys::passkeys.notification_success_title'))
+            ->title(__('filament-passkeys::passkeys.created_notification_title'))
             ->success()
             ->send();
     }
