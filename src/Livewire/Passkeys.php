@@ -27,6 +27,16 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
             ->action(fn (array $arguments) => $this->deletePasskey($arguments['passkey']));
     }
 
+    public function deletePasskey(int $passkeyId): void
+    {
+        parent::deletePasskey($passkeyId);
+
+        Notification::make()
+            ->title(__('filament-passkeys::passkeys.deleted_notification_title'))
+            ->success()
+            ->send();
+    }
+
     public function storePasskey(string $passkey): void
     {
         parent::storePasskey($passkey);

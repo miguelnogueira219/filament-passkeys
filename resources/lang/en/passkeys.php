@@ -14,5 +14,6 @@ return [
     'no_passkeys_registered' => __('passkeys::passkeys.no_passkeys_registered'),
     'not_used_yet' => __('passkeys::passkeys.not_used_yet'),
     'passkeys' => __('passkeys::passkeys.passkeys'),
-    'notification_success_title' => 'Your passkey has been created',
+    'created_notification_title' => 'Your passkey has been created',
+    'deleted_notification_title' => 'Your passkey has been deleted',
 ];
