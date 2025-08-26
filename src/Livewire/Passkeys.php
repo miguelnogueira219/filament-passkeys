@@ -7,6 +7,7 @@ namespace MarcelWeidum\Passkeys\Livewire;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Illuminate\View\View;
@@ -24,6 +25,16 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
             ->color('danger')
             ->requiresConfirmation()
             ->action(fn (array $arguments) => $this->deletePasskey($arguments['passkey']));
+    }
+
+    public function storePasskey(string $passkey): void
+    {
+        parent::storePasskey($passkey);
+
+        Notification::make()
+            ->title(__('filament-passkeys::passkeys.notification_success_title'))
+            ->success()
+            ->send();
     }
 
     public function render(): View
