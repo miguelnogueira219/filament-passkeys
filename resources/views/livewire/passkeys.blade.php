@@ -2,7 +2,7 @@
     <div>
         <form id="passkeyForm" wire:submit="validatePasskeyProperties" class="flex items-start space-x-2">
             <div class="w-full">
-                <x-filament::input.wrapper prefix="{{ __('passkeys::passkeys.name') }}" :valid="! $errors->has('name')">
+                <x-filament::input.wrapper prefix="{{ __('filament-passkeys::passkeys.name') }}" :valid="! $errors->has('name')">
                     <x-filament::input
                         type="text"
                         wire:model="name"
