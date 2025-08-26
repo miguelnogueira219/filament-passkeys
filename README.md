@@ -9,8 +9,7 @@ Use passkeys in your filamentphp app.
 This package is using the [passkeys package from spatie](https://spatie.be/docs/laravel-passkeys).
 
 > [!CAUTION]
-> The current release is an **alpha** release — use it cautiously in production.
-> A lot of features and customizations are soon coming.
+> The current release is a **beta** release — use it cautiously in production.
 
 ## Installation
 
