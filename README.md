@@ -51,6 +51,12 @@ php artisan migrate
 Route::passkeys();
 ```
 
+(Optional) If you want to customize the translations, you can publish the translations by running:
+
+```bash
+php artisan vendor:publish --tag="filament-passkeys"
+```
+
 ## Common problems
 If you're having problems creating passkeys on your profile page, check if your `APP_URL` in the `.env` file is set to the correct url of the application.
 
