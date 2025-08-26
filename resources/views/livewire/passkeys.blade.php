@@ -34,9 +34,7 @@
                             </div>
 
                             <div class="ml-auto">
-                                <x-filament::button wire:click="deletePasskey({{ $passkey->id }})" color="danger">
-                                    {{ __('passkeys::passkeys.delete') }}
-                                </x-filament::button>
+                                {{ ($this->deleteAction)(['passkey' => $passkey->id]) }}
                             </div>
                         </div>
                     </x-filament::fieldset>
@@ -44,6 +42,8 @@
             </ul>
         </div>
     @endif
+
+    <x-filament-actions::modals />
 </div>
 
 @include('passkeys::livewire.partials.createScript')
