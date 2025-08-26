@@ -30,7 +30,7 @@
                         <div class="flex items-center">
                             <div class="mr-2 flex flex-col">
                                 <span>{{ $passkey->name }}</span>
-                                <span class="text-xs text-gray-400">{{ __('passkeys::passkeys.last_used') }}: {{ $passkey->last_used_at?->diffForHumans() ?? __('passkeys::passkeys.not_used_yet') }}</span>
+                                <span class="text-xs fi-sc-text">{{ __('passkeys::passkeys.last_used') }}: {{ $passkey->last_used_at?->diffForHumans() ?? __('passkeys::passkeys.not_used_yet') }}</span>
                             </div>
 
                             <div class="ml-auto">
