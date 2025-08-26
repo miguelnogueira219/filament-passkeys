@@ -14,6 +14,7 @@ return [
     'no_passkeys_registered' => __('passkeys::passkeys.no_passkeys_registered'),
     'not_used_yet' => __('passkeys::passkeys.not_used_yet'),
     'passkeys' => __('passkeys::passkeys.passkeys'),
+    'description' => 'Passkeys let you log in without needing a password. Instead of a password, you can generate a passkey which will be stored in 1Pass, MacOS\' password app, or alternative app on your favourite OS.',
     'created_notification_title' => 'Your passkey has been created',
     'deleted_notification_title' => 'Your passkey has been deleted',
 ];

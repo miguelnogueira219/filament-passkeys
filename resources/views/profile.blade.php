@@ -3,5 +3,9 @@
         {{ __('Passkeys') }}
     </x-slot>
 
+    <x-slot name="description">
+        {{ __('filament-passkeys::passkeys.description') }}
+    </x-slot>
+
     <livewire:filament-passkeys />
 </x-filament::section>
