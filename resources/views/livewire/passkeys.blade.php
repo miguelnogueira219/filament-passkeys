@@ -1,7 +1,7 @@
 <div>
     <div>
         <form id="passkeyForm" wire:submit="validatePasskeyProperties" class="flex items-start space-x-2">
-            <div class="w-full">
+            <div class="w-full fi-fo-field">
                 <x-filament::input.wrapper prefix="{{ __('filament-passkeys::passkeys.name') }}" :valid="! $errors->has('name')">
                     <x-filament::input
                         type="text"
@@ -10,7 +10,7 @@
                 </x-filament::input.wrapper>
 
                 @error('name')
-                    <span class="mt-1 text-red-500 text-sm">{{ $message }}</span>
+                    <p class="fi-fo-field-wrp-error-message">{{ $message }}</p>
                 @enderror
             </div>
 
