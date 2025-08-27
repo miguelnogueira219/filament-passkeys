@@ -96,7 +96,7 @@ final class PasskeysServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            Css::make('filament-passkeys-styles', __DIR__.'./../resources/dist/filament-passkeys.css'),
+            Css::make('filament-passkeys-styles', __DIR__.'/../resources/dist/filament-passkeys.css'),
             Js::make('filament-passkeys-scripts', __DIR__.'/../resources/dist/filament-passkeys.js'),
         ];
     }
