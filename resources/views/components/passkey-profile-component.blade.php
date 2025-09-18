@@ -7,5 +7,5 @@
         {{ __('filament-passkeys::passkeys.description') }}
     </x-slot>
 
-    <livewire:filament-passkeys />
+    <livewire:filament-passkeys-standalone />
 </x-filament::section>

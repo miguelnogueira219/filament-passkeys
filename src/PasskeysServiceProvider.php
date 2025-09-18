@@ -14,6 +14,7 @@ use Filament\View\PanelsRenderHook;
 use Illuminate\View\View;
 use Livewire\Livewire;
 use MarcelWeidum\Passkeys\Livewire\Passkeys as LivewirePasskeys;
+use MarcelWeidum\Passkeys\Livewire\PasskeysStandalone as LivewirePasskeysStandalone;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -83,6 +84,7 @@ final class PasskeysServiceProvider extends PackageServiceProvider
         );
 
         Livewire::component('filament-passkeys', LivewirePasskeys::class);
+        Livewire::component('filament-passkeys-standalone', LivewirePasskeysStandalone::class);
     }
 
     protected function getAssetPackageName(): string
