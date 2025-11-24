@@ -71,6 +71,8 @@ public function panel(Panel $panel): Panel
 }
 ```
 
+Don't forget to add `->profile()` to you panel as well to manage your passkeys.
+
 (Optional) If you want to customize the translations, you can publish the translations by running:
 
 ```bash
