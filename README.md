@@ -4,6 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/marcelweidum/filament-passkeys.svg?style=flat-square)](https://packagist.org/packages/marcelweidum/filament-passkeys)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/marcelweidum/filament-passkeys/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/marcelweidum/filament-passkeys/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 ![Filament 4.x](https://img.shields.io/badge/Filament-4.x-007ec6?style=flat-square)
+![Filament 5.x](https://img.shields.io/badge/Filament-5.x-44cc11?style=flat-square)
 
 Use passkeys in your filament app.
 This package is using the [passkeys package from spatie](https://spatie.be/docs/laravel-passkeys).
