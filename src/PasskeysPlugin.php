@@ -10,8 +10,6 @@ use Filament\Panel;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\View\View;
-use Livewire\Livewire;
-use MarcelWeidum\Passkeys\Livewire\Passkeys as LivewirePasskeys;
 
 final class PasskeysPlugin implements Plugin
 {
@@ -56,7 +54,5 @@ final class PasskeysPlugin implements Plugin
             fn (): View => view('filament-passkeys::profile'),
             scopes: $panel->getProfilePage() ?? EditProfile::class,
         );
-
-        Livewire::component('filament-passkeys', LivewirePasskeys::class);
     }
 }
