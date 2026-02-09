@@ -56,7 +56,5 @@ final class PasskeysPlugin implements Plugin
             fn (): View => view('filament-passkeys::profile'),
             scopes: $panel->getProfilePage() ?? EditProfile::class,
         );
-
-        Livewire::component('filament-passkeys', LivewirePasskeys::class);
     }
 }
