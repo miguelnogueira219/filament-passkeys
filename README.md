@@ -17,7 +17,7 @@ This package is using the [passkeys package from spatie](https://spatie.be/docs/
 
 &nbsp;
 
-The `2.x` version is for Filament v3 & v4. For Filament v5 support use the version [3.x](https://github.com/MarcelWeidum/filament-passkeys/tree/3.x).
+**Version compatibility:** `2.x` supports Filament v3 and v4. For Filament v5, use the [`3.x` branch](https://github.com/MarcelWeidum/filament-passkeys/tree/3.x).
 
 ## Installation
 
