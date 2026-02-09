@@ -17,6 +17,8 @@ This package is using the [passkeys package from spatie](https://spatie.be/docs/
 
 &nbsp;
 
+**Version compatibility:** `3.x` supports Filament v5. For Filament v3 and v4, use the [`2.x` branch](https://github.com/MarcelWeidum/filament-passkeys/tree/2.x).
+
 ## Installation
 
 1. Install the package via composer:
