@@ -7,7 +7,7 @@
 ![Filament 5.x](https://img.shields.io/badge/Filament-5.x-44cc11?style=flat-square)
 
 Use passkeys in your filament app.
-This package is using the [passkeys package from spatie](https://spatie.be/docs/laravel-passkeys).
+This package uses Laravel's native passkeys package.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="art/cover-dark.png">
@@ -27,18 +27,18 @@ This package is using the [passkeys package from spatie](https://spatie.be/docs/
 composer require marcelweidum/filament-passkeys
 ```
 
-2. Add the package's interface and trait to your user model
+2. Add Laravel's passkey interface and trait to your user model
 
 ```php
 namespace App\Models;
 
-use Spatie\LaravelPasskeys\Models\Concerns\HasPasskeys;
-use Spatie\LaravelPasskeys\Models\Concerns\InteractsWithPasskeys;
+use Laravel\Passkeys\Contracts\PasskeyUser;
+use Laravel\Passkeys\PasskeyAuthenticatable;
 // ...
 
-class User extends Authenticatable implements HasPasskeys
+class User extends Authenticatable implements PasskeyUser
 {
-    use HasFactory, Notifiable, InteractsWithPasskeys;
+    use HasFactory, Notifiable, PasskeyAuthenticatable;
 
     // ... 
 }
@@ -51,14 +51,13 @@ php artisan vendor:publish --tag="passkeys-migrations"
 php artisan migrate
 ```
 
-4. Add the package provided routes
+Laravel registers the passkey routes automatically. You can optionally publish Laravel's passkeys config:
 
-```php
-// routes/web.php
-Route::passkeys();
+```bash
+php artisan vendor:publish --tag="passkeys-config"
 ```
 
-5. Add passkeys plugin to your Filament Panel
+4. Add passkeys plugin to your Filament Panel
 
 Add passkeys to a panel by adding the class to your Filament Panel's plugin() or plugins([]) method.
 
@@ -75,6 +74,19 @@ public function panel(Panel $panel): Panel
 ```
 
 Don't forget to add `->profile()` to you panel as well to manage your passkeys.
+
+## Upgrading from the Spatie passkeys package
+
+This package no longer uses `spatie/laravel-passkeys`. If your application already has passkeys created with the Spatie package, publish and run this package's migrations after upgrading:
+
+```bash
+php artisan vendor:publish --tag="filament-passkeys-migrations"
+php artisan migrate
+```
+
+The upgrade migration adds Laravel's native `user_id` and `credential` columns to the existing `passkeys` table and converts Spatie's stored credential JSON to Laravel's expected format. Existing `authenticatable_id` and `data` columns are left in place.
+
+For existing Spatie-backed applications, do not run Laravel's fresh `create_passkeys_table` migration against the existing table. Use the upgrade migration above instead.
 
 (Optional) If you want to customize the translations, you can publish the translations by running:
 
@@ -96,7 +108,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [MarcelWeidum](https://github.com/MarcelWeidum)
-- [Spatie](https://github.com/spatie)
 - [All Contributors](../../contributors)
 
 ## License
