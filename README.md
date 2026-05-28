@@ -77,16 +77,9 @@ Don't forget to add `->profile()` to you panel as well to manage your passkeys.
 
 ## Upgrading from the Spatie passkeys package
 
-This package no longer uses `spatie/laravel-passkeys`. If your application already has passkeys created with the Spatie package, publish and run this package's migrations after upgrading:
+This package no longer uses `spatie/laravel-passkeys`. If you are upgrading an existing 3.x application to the native Laravel passkeys version, follow the [3.x to native Laravel upgrade guide](UPGRADE.md).
 
-```bash
-php artisan vendor:publish --tag="filament-passkeys-migrations"
-php artisan migrate
-```
-
-The upgrade migration adds Laravel's native `user_id` and `credential` columns to the existing `passkeys` table and converts Spatie's stored credential JSON to Laravel's expected format. Existing `authenticatable_id` and `data` columns are left in place.
-
-For existing Spatie-backed applications, do not run Laravel's fresh `create_passkeys_table` migration against the existing table. Use the upgrade migration above instead.
+For existing Spatie-backed applications, do not run Laravel's fresh `create_passkeys_table` migration against the existing table. The upgrade guide uses this package's conversion migration instead.
 
 (Optional) If you want to customize the translations, you can publish the translations by running:
 
