@@ -19,9 +19,10 @@ use Laravel\Passkeys\Actions\DeletePasskey;
 use Laravel\Passkeys\Contracts\PasskeyUser;
 use Laravel\Passkeys\Passkey;
 use Laravel\Passkeys\Passkeys as LaravelPasskeys;
+use Livewire\Component;
 use RuntimeException;
 
-final class Passkeys implements HasActions, HasSchemas
+final class Passkeys extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
