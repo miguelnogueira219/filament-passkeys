@@ -65,6 +65,14 @@ final class Passkeys extends Component implements HasActions, HasSchemas
             ->send();
     }
 
+    public function passkeyAlreadyExists(): void
+    {
+        Notification::make()
+            ->title(__('filament-passkeys::passkeys.already_exists_notification_title'))
+            ->danger()
+            ->send();
+    }
+
     public function render(): View
     {
         return view('filament-passkeys::livewire.passkeys', data: [

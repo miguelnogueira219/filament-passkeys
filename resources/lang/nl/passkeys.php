@@ -15,6 +15,7 @@ return [
     'not_used_yet' => 'Nog niet gebruikt',
     'passkeys' => 'Passkeys',
     'description' => 'Passkeys laten je inloggen zonder een wachtwoord nodig te hebben. In plaats van een wachtwoord kun je een passkey genereren die wordt opgeslagen in 1Pass, de wachtwoord-app van MacOS, of een alternatieve app op je favoriete besturingssysteem.',
+    'already_exists_notification_title' => 'Dit apparaat is al geregistreerd als passkey.',
     'created_notification_title' => 'Je passkey is aangemaakt',
     'deleted_notification_title' => 'Je passkey is verwijderd',
 ];

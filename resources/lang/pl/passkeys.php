@@ -15,6 +15,7 @@ return [
     'not_used_yet' => 'Jeszcze nie uzyto',
     'passkeys' => 'Klucze dostepu',
     'description' => 'Klucze dostępu pozwalają logować się bez hasła. Zamiast hasła możesz wygenerować klucz dostępu, który zostanie zapisany w 1Pass, aplikacji MacOS lub innej aplikacji na Twoim ulubionym systemie operacyjnym.',
+    'already_exists_notification_title' => 'To urządzenie jest już zarejestrowane jako klucz dostępu.',
     'created_notification_title' => 'Twój klucz dostępu został utworzony',
     'deleted_notification_title' => 'Twój klucz dostępu został usunięty',
 ];

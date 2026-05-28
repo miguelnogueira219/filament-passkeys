@@ -9,8 +9,18 @@
                         return
                     }
 
-                    await window.FilamentPasskeys.register(this.name)
-                    await $wire.passkeyCreated()
+                    try {
+                        await window.FilamentPasskeys.register(this.name)
+                        await $wire.passkeyCreated()
+                    } catch (error) {
+                        if (error?.name === 'PasskeyExistsError') {
+                            await $wire.passkeyAlreadyExists()
+
+                            return
+                        }
+
+                        throw error
+                    }
                 },
             }"
             x-on:submit.prevent="register"
