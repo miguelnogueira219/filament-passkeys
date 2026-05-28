@@ -16,13 +16,13 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 final class PasskeysServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-passkeys';
-
-    public static string $viewNamespace = 'filament-passkeys';
-
     private const MIGRATIONS_TAG = 'filament-passkeys-migrations';
 
     private const UPGRADE_MIGRATION = '2026_05_09_000000_migrate_spatie_passkeys_to_laravel_passkeys.php';
+
+    public static string $name = 'filament-passkeys';
+
+    public static string $viewNamespace = 'filament-passkeys';
 
     public function configurePackage(Package $package): void
     {
