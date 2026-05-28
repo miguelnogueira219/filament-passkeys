@@ -1,9 +1,17 @@
-import {
-    browserSupportsWebAuthn,
-    startAuthentication,
-    startRegistration,
-} from '@simplewebauthn/browser'
+import { Passkeys } from '@laravel/passkeys'
 
-window.browserSupportsWebAuthn = browserSupportsWebAuthn;
-window.startAuthentication = startAuthentication;
-window.startRegistration = startRegistration;
+window.FilamentPasskeys = {
+    async register(name) {
+        if (! name?.trim()) {
+            return
+        }
+
+        return Passkeys.register({ name })
+    },
+
+    async login(redirect) {
+        const response = await Passkeys.verify()
+
+        window.location.href = redirect || response?.redirect || '/'
+    },
+}

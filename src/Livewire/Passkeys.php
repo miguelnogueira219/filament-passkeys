@@ -10,18 +10,29 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\View\View;
-use Spatie\LaravelPasskeys\Livewire\PasskeysComponent;
+use Laravel\Passkeys\Actions\DeletePasskey;
+use Laravel\Passkeys\Contracts\PasskeyUser;
+use Laravel\Passkeys\Passkey;
+use Laravel\Passkeys\Passkeys as LaravelPasskeys;
+use Livewire\Component;
+use RuntimeException;
 
-final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
+final class Passkeys extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
 
+    public string $name = '';
+
     public function deleteAction(): Action
     {
         return Action::make('delete')
-            ->label(__('passkeys::passkeys.delete'))
+            ->label(__('filament-passkeys::passkeys.delete'))
             ->color('danger')
             ->requiresConfirmation()
             ->action(fn (array $arguments) => $this->deletePasskey($arguments['passkey']));
@@ -29,7 +40,14 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
 
     public function deletePasskey(int|string $passkeyId): void
     {
-        parent::deletePasskey($passkeyId);
+        $user = $this->currentUser();
+
+        /** @var Passkey $passkey */
+        $passkey = LaravelPasskeys::passkeyModel()::query()->findOrFail($passkeyId);
+
+        abort_unless((string) $passkey->user_id === (string) $user->getKey(), 403);
+
+        app(DeletePasskey::class)($user, $passkey);
 
         Notification::make()
             ->title(__('filament-passkeys::passkeys.deleted_notification_title'))
@@ -37,9 +55,9 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
             ->send();
     }
 
-    public function storePasskey(string $passkey): void
+    public function passkeyCreated(): void
     {
-        parent::storePasskey($passkey);
+        $this->reset('name');
 
         Notification::make()
             ->title(__('filament-passkeys::passkeys.created_notification_title'))
@@ -47,10 +65,44 @@ final class Passkeys extends PasskeysComponent implements HasActions, HasSchemas
             ->send();
     }
 
+    public function passkeyAlreadyExists(): void
+    {
+        Notification::make()
+            ->title(__('filament-passkeys::passkeys.already_exists_notification_title'))
+            ->danger()
+            ->send();
+    }
+
     public function render(): View
     {
         return view('filament-passkeys::livewire.passkeys', data: [
-            'passkeys' => $this->currentUser()->passkeys,
+            'passkeys' => $this->passkeys(),
         ]);
+    }
+
+    private function currentUser(): PasskeyUser
+    {
+        $user = Auth::guard(Config::string('passkeys.guard', 'web'))->user();
+
+        if (! $user instanceof Authenticatable) {
+            throw new RuntimeException('A user must be authenticated to manage passkeys.');
+        }
+
+        if (! $user instanceof PasskeyUser) {
+            throw new RuntimeException('User model must implement the Laravel PasskeyUser contract.');
+        }
+
+        return $user;
+    }
+
+    /**
+     * @return Collection<int, Passkey>
+     */
+    private function passkeys(): Collection
+    {
+        return $this->currentUser()
+            ->passkeys()
+            ->latest()
+            ->get();
     }
 }

@@ -1,11 +1,38 @@
 <div>
     <div>
-        <form id="passkeyForm" wire:submit="validatePasskeyProperties" class="flex items-start space-x-2">
+        <form
+            id="passkeyForm"
+            x-data="{
+                name: @entangle('name'),
+                async register() {
+                    if (! this.name?.trim()) {
+                        return
+                    }
+
+                    try {
+                        await window.FilamentPasskeys.register(this.name)
+                        await $wire.passkeyCreated()
+                    } catch (error) {
+                        if (error?.name === 'PasskeyExistsError') {
+                            await $wire.passkeyAlreadyExists()
+
+                            return
+                        }
+
+                        throw error
+                    }
+                },
+            }"
+            x-on:submit.prevent="register"
+            class="flex items-start space-x-2"
+        >
             <div class="w-full fi-fo-field">
                 <x-filament::input.wrapper prefix="{{ __('filament-passkeys::passkeys.name') }}" :valid="! $errors->has('name')">
                     <x-filament::input
                         type="text"
-                        wire:model="name"
+                        x-model="name"
+                        autocomplete="off"
+                        placeholder="{{ __('filament-passkeys::passkeys.name_placeholder') }}"
                     />
                 </x-filament::input.wrapper>
 
@@ -15,7 +42,7 @@
             </div>
 
             <x-filament::button type="submit">
-                {{ __('passkeys::passkeys.create') }}
+                {{ __('filament-passkeys::passkeys.create') }}
             </x-filament::button>
         </form>
     </div>
@@ -29,7 +56,7 @@
                         <div class="flex items-center">
                             <div class="mr-2 flex flex-col">
                                 <span>{{ $passkey->name }}</span>
-                                <span class="text-xs fi-sc-text">{{ __('passkeys::passkeys.last_used') }}: {{ $passkey->last_used_at?->diffForHumans() ?? __('passkeys::passkeys.not_used_yet') }}</span>
+                                <span class="text-xs fi-sc-text">{{ __('filament-passkeys::passkeys.last_used') }}: {{ $passkey->last_used_at?->diffForHumans() ?? __('filament-passkeys::passkeys.not_used_yet') }}</span>
                             </div>
 
                             <div class="ml-auto">
@@ -44,5 +71,3 @@
 
     <x-filament-actions::modals />
 </div>
-
-@include('passkeys::livewire.partials.createScript')
