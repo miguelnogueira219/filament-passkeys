@@ -7,7 +7,7 @@
 ![Filament 5.x](https://img.shields.io/badge/Filament-5.x-44cc11?style=flat-square)
 
 Use passkeys in your filament app.
-This package uses Laravel's native passkeys package.
+The current `4.x` version uses Laravel's native passkeys package.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="art/cover-dark.png">
@@ -17,7 +17,13 @@ This package uses Laravel's native passkeys package.
 
 &nbsp;
 
-**Version compatibility:** `3.x` supports Filament v5. For Filament v3 and v4, use the [`2.x` branch](https://github.com/MarcelWeidum/filament-passkeys/tree/2.x).
+## Version compatibility
+
+| Package version | Filament version | Passkeys backend | Use this when |
+| --- | --- | --- | --- |
+| `4.x` | Filament v5 | Laravel native passkeys (`laravel/passkeys`) | Starting a new Filament v5 app or upgrading to Laravel native passkeys |
+| [`3.x`](https://github.com/MarcelWeidum/filament-passkeys/tree/3.x) | Filament v5 | Spatie passkeys (`spatie/laravel-passkeys`) | Staying on the older Spatie-backed implementation |
+| [`2.x`](https://github.com/MarcelWeidum/filament-passkeys/tree/2.x) | Filament v3 or v4 | Spatie passkeys (`spatie/laravel-passkeys`) | Using Filament v3 or v4 |
 
 ## Installation
 
