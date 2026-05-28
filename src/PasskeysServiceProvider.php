@@ -20,6 +20,10 @@ final class PasskeysServiceProvider extends PackageServiceProvider
 
     public static string $viewNamespace = 'filament-passkeys';
 
+    private const MIGRATIONS_TAG = 'filament-passkeys-migrations';
+
+    private const UPGRADE_MIGRATION = '2026_05_09_000000_migrate_spatie_passkeys_to_laravel_passkeys.php';
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -55,6 +59,12 @@ final class PasskeysServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../database/migrations/'.self::UPGRADE_MIGRATION => database_path('migrations/'.self::UPGRADE_MIGRATION),
+            ], self::MIGRATIONS_TAG);
+        }
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),
