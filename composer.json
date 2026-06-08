@@ -24,7 +24,8 @@
         "php": "^8.2",
         "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0",
-        "spatie/laravel-passkeys": "*"
+        "spatie/laravel-passkeys": "^1.5.3",
+        "web-auth/webauthn-lib": "^5.2.4"
     },
     "require-dev": {
         "laravel/pint": "^1.0",

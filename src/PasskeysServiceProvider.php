@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace MarcelWeidum\Passkeys;
 
-use Filament\Auth\Pages\EditProfile;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Facades\FilamentView;
-use Filament\View\PanelsRenderHook;
-use Illuminate\View\View;
 use Livewire\Livewire;
 use MarcelWeidum\Passkeys\Livewire\Passkeys as LivewirePasskeys;
 use MarcelWeidum\Passkeys\Livewire\PasskeysStandalone as LivewirePasskeysStandalone;
@@ -64,23 +60,6 @@ final class PasskeysServiceProvider extends PackageServiceProvider
         FilamentAsset::register(
             $this->getAssets(),
             $this->getAssetPackageName()
-        );
-
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
-            fn (): View => view('filament-passkeys::login'),
-        );
-
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::SIMPLE_PAGE_END,
-            fn (): View => view('filament-passkeys::profile'),
-            scopes: EditProfile::class,
-        );
-
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::PAGE_END,
-            fn (): View => view('filament-passkeys::profile'),
-            scopes: EditProfile::class,
         );
 
         Livewire::component('filament-passkeys', LivewirePasskeys::class);

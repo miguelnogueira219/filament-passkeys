@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace MarcelWeidum\Passkeys;
 
+use Filament\Auth\Pages\EditProfile;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\View\View;
 
 final class PasskeysPlugin implements Plugin
 {
@@ -34,6 +38,21 @@ final class PasskeysPlugin implements Plugin
 
     public function boot(Panel $panel): void
     {
-        //
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
+            fn (): View => view('filament-passkeys::login'),
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::SIMPLE_PAGE_END,
+            fn (): View => view('filament-passkeys::profile'),
+            scopes: $panel->getProfilePage() ?? EditProfile::class,
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::PAGE_END,
+            fn (): View => view('filament-passkeys::profile'),
+            scopes: $panel->getProfilePage() ?? EditProfile::class,
+        );
     }
 }
