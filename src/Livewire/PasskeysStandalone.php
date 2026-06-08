@@ -27,7 +27,7 @@ final class PasskeysStandalone extends PasskeysComponent implements HasActions, 
             ->action(fn (array $arguments) => $this->deletePasskey($arguments['passkey']));
     }
 
-    public function deletePasskey(int $passkeyId): void
+    public function deletePasskey(int|string $passkeyId): void
     {
         parent::deletePasskey($passkeyId);
 
